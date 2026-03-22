@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CCC Neural Network | Cezar Constantin</title>
+    <meta
+      name="description"
+      content="Portfolio-styled neural network explorer for handwritten digit recognition with live activation visualization."
+    />
+    <meta name="theme-color" content="#0B0F1A" />
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RN75RTF8BC"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-RN75RTF8BC");
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="site-header" aria-label="Site navigation">
+        <a
+          class="brand-mark"
+          href="https://www.cezar-constantin-chirila.com/portfolio/"
+          target="_blank"
+          rel="noreferrer"
+        >
+          <span class="brand-dot" aria-hidden="true"></span>
+          <span class="brand-copy">
+            <strong>CCC Neural Network</strong>
+            <span>Minimal, hosted neural network simulator</span>
+          </span>
+        </a>
+
+        <nav class="top-nav" aria-label="Section navigation">
+          <a class="nav-link" href="#experience-section">Simulator</a>
+          <a class="nav-link" href="#features-section">Feature maps</a>
+          <a class="nav-link" href="#contact-section">Contact</a>
+        </nav>
+
+        <div class="header-actions">
+          <a
+            class="header-chip"
+            href="https://www.cezar-constantin-chirila.com/portfolio/"
+            target="_blank"
+            rel="noreferrer"
+          >
+            AI Portfolio
+          </a>
+          <a
+            class="header-chip is-strong"
+            href="https://github.com/cezar-constantin/neural_network_ccc"
+            target="_blank"
+            rel="noreferrer"
+          >
+            GitHub repo
+          </a>
+        </div>
+      </header>
+
+      <section class="hero card">
+        <div class="hero-main">
+          <p class="eyebrow">Hosted solution</p>
+          <h1>CCC Neural Network</h1>
+          <p class="hero-text">
+            A portfolio-styled neural network explorer where you can draw a digit, watch it normalize into a 28x28
+            signal, and inspect how a pretrained network reacts layer by layer in real time.
+          </p>
+          <p class="hero-detail">
+            Built as a refined visual reboot of the original simulator, with the same model and interaction flow
+            presented in a darker, cleaner, more high-end interface.
+          </p>
+
+          <div class="hero-actions">
+            <a
+              class="hero-link is-primary"
+              href="https://cezar-constantin.github.io/neural_network_ccc/"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Open live demo
+            </a>
+            <a
+              class="hero-link is-secondary"
+              href="https://www.cezar-constantin-chirila.com/portfolio/"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Visit portfolio
+            </a>
+            <a
+              class="hero-link is-secondary"
+              href="https://github.com/cezar-constantin/neural_network_ccc"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Inspect source
+            </a>
+          </div>
+
+          <div class="hero-notes" aria-label="Project highlights">
+            <span class="note-pill">784 -> 16 -> 16 -> 10 architecture</span>
+            <span class="note-pill">MNIST-style preprocessing</span>
+            <span class="note-pill">Interactive activation map</span>
+          </div>
+        </div>
+
+        <div class="hero-side">
+          <div class="metric-stack">
+            <article class="metric-card">
+              <span class="metric-label">Model performance</span>
+              <strong class="metric-value" id="model-accuracy">Loading...</strong>
+            </article>
+
+            <article class="metric-card">
+              <span class="metric-label">Deployment</span>
+              <strong class="metric-value">
+                <a
+                  class="metric-link"
+                  href="https://cezar-constantin.github.io/neural_network_ccc/"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  cezar-constantin.github.io/neural_network_ccc
+                </a>
+              </strong>
+            </article>
+
+            <article class="metric-card">
+              <span class="metric-label">Repository</span>
+              <strong class="metric-value">
+                <a
+                  class="metric-link"
+                  href="https://github.com/cezar-constantin/neural_network_ccc"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  github.com/cezar-constantin/neural_network_ccc
+                </a>
+              </strong>
+            </article>
+          </div>
+
+          <a
+            class="hero-qr"
+            href="https://cezar-constantin.github.io/neural_network_ccc/"
+            target="_blank"
+            rel="noreferrer"
+            aria-label="Open the live CCC Neural Network demo"
+          >
+            <img
+              src="https://api.qrserver.com/v1/create-qr-code/?size=360x360&data=https%3A%2F%2Fcezar-constantin.github.io%2Fneural_network_ccc%2F"
+              alt="QR code for the live CCC Neural Network demo"
+            />
+            <span>Scan for the hosted version</span>
+          </a>
+        </div>
+      </section>
+
+      <section class="tabs card" aria-label="Content tabs">
+        <div class="tab-list" role="tablist">
+          <button
+            class="tab-button is-active"
+            id="tab-button-experience"
+            type="button"
+            role="tab"
+            aria-selected="true"
+            aria-controls="tab-panel-experience"
+            data-tab-target="experience"
+          >
+            Live simulator
+          </button>
+          <button
+            class="tab-button"
+            id="tab-button-features"
+            type="button"
+            role="tab"
+            aria-selected="false"
+            aria-controls="tab-panel-features"
+            data-tab-target="features"
+          >
+            Learned features
+          </button>
+        </div>
+      </section>
+
+      <section
+        class="tab-panel is-active"
+        id="tab-panel-experience"
+        role="tabpanel"
+        aria-labelledby="tab-button-experience"
+        data-tab-panel="experience"
+      >
+        <section class="section-intro" id="experience-section">
+          <p class="section-kicker">Interactive demo</p>
+          <h2>See the network interpret every stroke.</h2>
+          <p>
+            The input canvas, normalized preview, neuron diagram, and output bars are all synchronized so the model's
+            internal behavior stays visible instead of hidden behind a final prediction.
+          </p>
+        </section>
+
+        <div class="workspace-grid">
+          <section class="card draw-panel">
+            <div class="section-heading">
+              <div>
+                <p class="section-kicker">Input studio</p>
+                <h2>Draw a digit</h2>
+              </div>
+              <span class="status-pill" id="input-status">Live prediction</span>
+            </div>
+
+            <p class="helper-copy">
+              Draw with a mouse, stylus, or finger. The simulator centers and rescales your sketch before passing it
+              into the network, closely following an MNIST-style preprocessing flow.
+            </p>
+
+            <div class="draw-stage">
+              <div class="canvas-frame">
+                <canvas id="draw-canvas" width="560" height="560" aria-label="Drawing area"></canvas>
+                <div class="pixel-grid" aria-hidden="true"></div>
+              </div>
+
+              <div class="draw-side">
+                <div class="mini-preview">
+                  <div class="preview-label">
+                    <span>Normalized input</span>
+                    <strong>28x28 image seen by the model</strong>
+                  </div>
+                  <canvas id="normalized-canvas" width="28" height="28" aria-label="Normalized 28x28 input"></canvas>
+                </div>
+
+                <div class="controls">
+                  <button class="primary-button" id="clear-button" type="button">Clear canvas</button>
+                  <button class="secondary-button" id="sample-button" type="button">Try MNIST sample</button>
+                </div>
+
+                <article class="briefing-card">
+                  <p class="card-kicker">Tip</p>
+                  <h3>Draw boldly and keep the digit centered.</h3>
+                  <p>Closed loops and strong stroke contrast usually make the layer activations easier to read.</p>
+                </article>
+              </div>
+            </div>
+          </section>
+
+          <aside class="card briefing-panel">
+            <div class="section-heading">
+              <div>
+                <p class="section-kicker">Readout</p>
+                <h2>What the model is doing</h2>
+              </div>
+            </div>
+
+            <div class="briefing-list">
+              <article class="output-summary-card empty-state" id="output-summary-card">
+                <p class="card-kicker">Current prediction</p>
+                <div class="prediction-header">
+                  <div class="prediction-digit" id="prediction-digit">?</div>
+                  <div class="prediction-copy">
+                    <p class="confidence-line">Estimated digit</p>
+                    <h3 id="prediction-label">Waiting for your drawing</h3>
+                    <p class="confidence-line" id="prediction-confidence">Confidence: 0%</p>
+                  </div>
+                </div>
+              </article>
+
+              <article class="briefing-card">
+                <p class="card-kicker">Stage 1</p>
+                <h3>From sketch to tensor</h3>
+                <p>The handwritten canvas is compressed into a centered 28x28 grayscale signal, then flattened into 784 inputs.</p>
+              </article>
+
+              <article class="briefing-card">
+                <p class="card-kicker">Stage 2</p>
+                <h3>Hidden layers form structure</h3>
+                <p>Early neurons respond to local strokes, while the second hidden layer combines them into digit-like parts.</p>
+              </article>
+
+              <article class="briefing-card">
+                <p class="card-kicker">Stage 3</p>
+                <h3>Output probabilities settle the guess</h3>
+                <p>The ten output neurons compete through softmax, producing a probability distribution over digits 0 through 9.</p>
+              </article>
+            </div>
+          </aside>
+        </div>
+
+        <section class="card network-panel">
+          <div class="section-heading">
+            <div>
+              <p class="section-kicker">Activation map</p>
+              <h2>Neuron activation</h2>
+            </div>
+
+            <div class="network-toolbar" aria-label="Chart zoom controls">
+              <span class="zoom-label">Zoom</span>
+              <button class="zoom-button" id="zoom-out-button" type="button" aria-label="Zoom out">-</button>
+              <input
+                class="zoom-range"
+                id="zoom-range"
+                type="range"
+                min="100"
+                max="240"
+                step="10"
+                value="100"
+                aria-label="Neuron activation zoom"
+              />
+              <button class="zoom-button" id="zoom-in-button" type="button" aria-label="Zoom in">+</button>
+              <button class="zoom-reset-button" id="zoom-reset-button" type="button">Reset</button>
+              <strong class="zoom-value" id="zoom-value">100%</strong>
+            </div>
+          </div>
+
+          <p class="helper-copy network-hint">
+            Use the zoom controls to inspect dense regions of the diagram. On smaller screens, swipe horizontally
+            inside the network frame to explore the full path from input pixels to final probabilities.
+          </p>
+
+          <div class="explain-grid">
+            <article class="explain-card">
+              <p class="card-kicker">Input layer</p>
+              <h3>Every bright pixel becomes an activation.</h3>
+              <p>After normalization, the sketch is flattened into 784 scalar values that seed the rest of the network.</p>
+            </article>
+
+            <article class="explain-card">
+              <p class="card-kicker">Hidden layer 1</p>
+              <h3>Stroke detectors come online first.</h3>
+              <p>These neurons respond to local diagonals, terminals, bends, corners, and simple stroke pressure patterns.</p>
+            </article>
+
+            <article class="explain-card">
+              <p class="card-kicker">Hidden layer 2</p>
+              <h3>Those strokes combine into digit parts.</h3>
+              <p>Curves, loops, bars, and partial circles emerge here before the output layer turns them into a class decision.</p>
+            </article>
+          </div>
+
+          <section class="connection-legend" aria-label="Connection line explanation">
+            <article class="connection-legend-item">
+              <span class="connection-line-swatch is-positive" aria-hidden="true"></span>
+              <div class="connection-legend-copy">
+                <strong>Electric blue</strong>
+                <p>Positive weights increase the next neuron's response when the source neuron is active.</p>
+              </div>
+            </article>
+
+            <article class="connection-legend-item">
+              <span class="connection-line-swatch is-negative" aria-hidden="true"></span>
+              <div class="connection-legend-copy">
+                <strong>Amber contrast</strong>
+                <p>Negative weights pull the next neuron down and weaken that connection path.</p>
+              </div>
+            </article>
+
+            <article class="connection-legend-item">
+              <span class="connection-line-swatch is-visibility" aria-hidden="true"></span>
+              <div class="connection-legend-copy">
+                <strong>Opacity and width</strong>
+                <p>Brighter, thicker edges indicate stronger active influence through the current prediction pass.</p>
+              </div>
+            </article>
+          </section>
+
+          <div class="network-shell">
+            <div class="network-display">
+              <div class="network-visual-scroll">
+                <div class="network-visual-frame" id="network-visual-frame">
+                  <svg id="network-svg" viewBox="0 0 1420 980" role="img" aria-label="Neural network visualization"></svg>
+                </div>
+              </div>
+
+              <section class="visual-output-bars" aria-label="Output probabilities">
+                <p class="card-kicker">Output layer</p>
+                <h3>Digit probabilities</h3>
+                <p class="confidence-line">
+                  The bars below mirror the final ten output neurons and update after each stroke or sample change.
+                </p>
+                <div class="probability-bars" id="probability-bars" aria-live="polite"></div>
+              </section>
+            </div>
+          </div>
+        </section>
+      </section>
+
+      <section
+        class="tab-panel"
+        id="tab-panel-features"
+        role="tabpanel"
+        aria-labelledby="tab-button-features"
+        data-tab-panel="features"
+        hidden
+      >
+        <section class="card feature-overview" id="features-section">
+          <div class="section-heading">
+            <div>
+              <p class="section-kicker">Feature maps</p>
+              <h2>How the learned filters are visualized</h2>
+            </div>
+          </div>
+
+          <p class="feature-overview-copy">
+            Each thumbnail below represents a learned weight pattern. Brighter cyan and blue areas correspond to
+            positive weights, while warm contrast tones indicate negative influence. Dark regions are near zero and
+            contribute only weakly.
+          </p>
+
+          <div class="legend-grid">
+            <div class="legend-item">
+              <span class="legend-swatch legend-layer-1"></span>
+              <span>Layer 1 uses cyan to emphasize early stroke detectors.</span>
+            </div>
+            <div class="legend-item">
+              <span class="legend-swatch legend-layer-2"></span>
+              <span>Layer 2 uses blue to show richer composite patterns.</span>
+            </div>
+            <div class="legend-item">
+              <span class="legend-swatch legend-negative"></span>
+              <span>Warm tones mark negative weights that suppress activation.</span>
+            </div>
+            <div class="legend-item">
+              <span class="legend-swatch legend-neutral"></span>
+              <span>Deep navy indicates values close to zero.</span>
+            </div>
+          </div>
+        </section>
+
+        <section class="feature-sections">
+          <section class="card feature-panel">
+            <div class="section-heading">
+              <div>
+                <p class="section-kicker">Layer 1</p>
+                <h2>Strokes and local patterns</h2>
+              </div>
+            </div>
+            <div class="feature-grid" id="feature-grid-layer-1"></div>
+          </section>
+
+          <section class="card feature-panel">
+            <div class="section-heading">
+              <div>
+                <p class="section-kicker">Layer 2</p>
+                <h2>Digit parts and composite shapes</h2>
+              </div>
+            </div>
+            <div class="feature-grid" id="feature-grid-layer-2"></div>
+          </section>
+        </section>
+      </section>
+
+      <section class="footer-panel-grid" aria-label="Support and disclaimer">
+        <section class="card support-card" id="contact-section">
+          <div class="section-heading">
+            <div>
+              <p class="section-kicker">Contact</p>
+              <h2>Ask about the simulator or the build.</h2>
+            </div>
+            <span class="status-pill">Direct contact form</span>
+          </div>
+
+          <p class="helper-copy contact-copy">
+            For broader work across AI, risk, and decision systems, visit
+            <a href="https://www.cezar-constantin-chirila.com/" target="_blank" rel="noreferrer">
+              www.cezar-constantin-chirila.com
+            </a>.
+          </p>
+
+          <form class="support-form" id="contact-form" novalidate>
+            <div class="panel-subgrid two-up">
+              <label class="field-card" for="contact-name">
+                <span class="field-label">Full name</span>
+                <input class="field-input" id="contact-name" name="Full name" type="text" autocomplete="name" required />
+              </label>
+
+              <label class="field-card" for="contact-company">
+                <span class="field-label">Company</span>
+                <input class="field-input" id="contact-company" name="Company" type="text" autocomplete="organization" />
+              </label>
+
+              <label class="field-card" for="contact-email">
+                <span class="field-label">Email address</span>
+                <input
+                  class="field-input"
+                  id="contact-email"
+                  name="Email address"
+                  type="email"
+                  autocomplete="email"
+                  required
+                />
+              </label>
+
+              <label class="field-card" for="contact-topic">
+                <span class="field-label">Question topic</span>
+                <input
+                  class="field-input"
+                  id="contact-topic"
+                  name="Question topic"
+                  type="text"
+                  placeholder="Demo feedback, technical question, collaboration..."
+                />
+              </label>
+            </div>
+
+            <label class="field-card" for="contact-question">
+              <span class="field-label">Question</span>
+              <textarea
+                class="editor-textarea contact-textarea"
+                id="contact-question"
+                name="Question"
+                rows="6"
+                placeholder="Write your question, context, or use case here."
+                required
+              ></textarea>
+            </label>
+
+            <input class="visually-hidden-input" type="text" name="_honey" tabindex="-1" autocomplete="off" />
+
+            <div class="contact-form-actions">
+              <button class="primary-button" id="contact-submit-button" type="submit">Send message</button>
+              <p class="contact-status" id="contact-status" aria-live="polite"></p>
+            </div>
+          </form>
+        </section>
+
+        <section class="card disclaimer-card">
+          <div class="section-heading">
+            <div>
+              <p class="section-kicker">Disclaimer</p>
+              <h2>Educational use only</h2>
+            </div>
+            <span class="status-pill">Non-commercial material</span>
+          </div>
+
+          <p class="helper-copy">
+            The models, code, weights, outputs, and visualizations available through this simulator are provided for
+            educational, training, and illustrative use only.
+          </p>
+          <p class="helper-copy">
+            They do not constitute legal, regulatory, accounting, audit, tax, investment, model risk management,
+            credit risk, or any other professional advice, and they should not be used for production or
+            business-critical decisions.
+          </p>
+          <p class="helper-copy">
+            Any commercial deployment or operational use would require independent validation, domain review, and
+            governance oversight by appropriately qualified professionals.
+          </p>
+        </section>
+      </section>
+    </div>
+
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>
