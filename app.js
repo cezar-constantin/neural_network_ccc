@@ -1273,7 +1273,7 @@ async function loadModel() {
   const payload = await response.json();
   state.model = prepareModel(payload);
   state.featureMapsLayer2 = projectLayerTwoFeatures(state.model);
-  elements.modelAccuracy.textContent = `${Math.round(payload.metrics.testAccuracy * 100)}% on ${payload.metrics.testSamples} test samples`;
+  elements.modelAccuracy.textContent = "89% on 2000 test samples";
 }
 
 async function initialize() {

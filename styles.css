@@ -110,9 +110,7 @@ svg {
 
 .brand-mark,
 .header-chip,
-.hero-link,
 .nav-link,
-.metric-link,
 .contact-copy a {
   color: var(--text);
   text-decoration: none;
@@ -180,7 +178,6 @@ svg {
 
 .nav-link:hover,
 .header-chip:hover,
-.metric-link:hover,
 .contact-copy a:hover {
   color: var(--text);
 }
@@ -232,7 +229,7 @@ svg {
 
 .hero {
   display: grid;
-  grid-template-columns: minmax(0, 1.18fr) minmax(360px, 0.82fr);
+  grid-template-columns: 1fr;
   gap: 28px;
   padding: 42px;
   background:
@@ -245,7 +242,6 @@ svg {
 .hero-main,
 .briefing-list,
 .draw-side,
-.metric-stack,
 .feature-sections,
 .support-form {
   display: grid;
@@ -285,7 +281,7 @@ svg {
 }
 
 .hero-text,
-.hero-detail,
+.hero-performance,
 .helper-copy,
 .feature-overview-copy,
 .confidence-line,
@@ -308,7 +304,7 @@ svg {
   line-height: 1.8;
 }
 
-.hero-detail,
+.hero-performance,
 .helper-copy,
 .feature-overview-copy,
 .contact-copy,
@@ -316,8 +312,6 @@ svg {
   line-height: 1.75;
 }
 
-.hero-actions,
-.hero-notes,
 .controls,
 .contact-form-actions {
   display: flex;
@@ -325,7 +319,6 @@ svg {
   gap: 12px;
 }
 
-.hero-link,
 .primary-button,
 .secondary-button,
 .zoom-button,
@@ -345,7 +338,6 @@ svg {
     opacity var(--transition);
 }
 
-.hero-link:hover,
 .primary-button:hover,
 .secondary-button:hover,
 .zoom-button:hover,
@@ -353,7 +345,6 @@ svg {
   transform: translateY(-1px);
 }
 
-.hero-link.is-primary,
 .primary-button {
   background: linear-gradient(135deg, var(--blue), var(--cyan));
   color: white;
@@ -361,7 +352,6 @@ svg {
   box-shadow: 0 18px 36px rgba(34, 211, 238, 0.18);
 }
 
-.hero-link.is-secondary,
 .secondary-button,
 .zoom-button,
 .zoom-reset-button {
@@ -371,7 +361,6 @@ svg {
   font-weight: 600;
 }
 
-.note-pill,
 .status-pill {
   display: inline-flex;
   align-items: center;
@@ -386,12 +375,6 @@ svg {
   font-weight: 600;
 }
 
-.hero-side {
-  display: flex;
-  align-items: stretch;
-}
-
-.metric-card,
 .briefing-card,
 .output-summary-card,
 .explain-card,
@@ -409,22 +392,14 @@ svg {
   box-shadow: 0 18px 40px rgba(2, 6, 23, 0.3);
 }
 
-.metric-card {
-  padding: 18px 20px;
+.hero-performance {
+  font-size: 1.02rem;
+  color: var(--ink);
 }
 
-.metric-value {
-  display: block;
-  margin-top: 8px;
-  font-size: 1rem;
-  line-height: 1.6;
+.hero-performance strong {
   color: var(--text);
-}
-
-.metric-link {
-  color: var(--text);
-  overflow-wrap: anywhere;
-  transition: color var(--transition);
+  font-weight: 700;
 }
 
 .page-section {
@@ -1184,13 +1159,10 @@ svg {
   }
 
   .controls,
-  .hero-actions,
-  .hero-notes,
   .contact-form-actions {
     flex-direction: column;
   }
 
-  .hero-link,
   .primary-button,
   .secondary-button {
     width: 100%;
