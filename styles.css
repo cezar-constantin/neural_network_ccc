@@ -387,13 +387,10 @@ svg {
 }
 
 .hero-side {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 16px;
+  display: flex;
   align-items: stretch;
 }
 
-.hero-brand-card,
 .metric-card,
 .briefing-card,
 .output-summary-card,
@@ -414,24 +411,6 @@ svg {
 
 .metric-card {
   padding: 18px 20px;
-}
-
-.hero-brand-card {
-  display: grid;
-  gap: 14px;
-  padding: 20px 22px;
-}
-
-.hero-brand-logo {
-  width: min(100%, 360px);
-  height: auto;
-}
-
-.hero-brand-text {
-  margin: 0;
-  max-width: 40ch;
-  color: var(--muted);
-  line-height: 1.7;
 }
 
 .metric-value {
