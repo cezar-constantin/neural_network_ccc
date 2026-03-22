@@ -113,7 +113,6 @@ svg {
 .hero-link,
 .nav-link,
 .metric-link,
-.hero-qr,
 .contact-copy a {
   color: var(--text);
   text-decoration: none;
@@ -126,13 +125,11 @@ svg {
   min-width: 0;
 }
 
-.brand-dot {
+.brand-logo {
   flex: 0 0 auto;
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, var(--blue), var(--cyan));
-  box-shadow: 0 0 24px rgba(34, 211, 238, 0.5);
+  width: 148px;
+  height: auto;
+  max-width: 100%;
 }
 
 .brand-copy {
@@ -331,7 +328,6 @@ svg {
 .hero-link,
 .primary-button,
 .secondary-button,
-.tab-button,
 .zoom-button,
 .zoom-reset-button {
   display: inline-flex;
@@ -352,7 +348,6 @@ svg {
 .hero-link:hover,
 .primary-button:hover,
 .secondary-button:hover,
-.tab-button:hover,
 .zoom-button:hover,
 .zoom-reset-button:hover {
   transform: translateY(-1px);
@@ -368,7 +363,6 @@ svg {
 
 .hero-link.is-secondary,
 .secondary-button,
-.tab-button,
 .zoom-button,
 .zoom-reset-button {
   border-color: rgba(255, 255, 255, 0.1);
@@ -394,14 +388,13 @@ svg {
 
 .hero-side {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 210px;
+  grid-template-columns: 1fr;
   gap: 16px;
   align-items: stretch;
 }
 
+.hero-brand-card,
 .metric-card,
-.hero-qr,
-.tabs,
 .briefing-card,
 .output-summary-card,
 .explain-card,
@@ -423,6 +416,24 @@ svg {
   padding: 18px 20px;
 }
 
+.hero-brand-card {
+  display: grid;
+  gap: 14px;
+  padding: 20px 22px;
+}
+
+.hero-brand-logo {
+  width: min(100%, 360px);
+  height: auto;
+}
+
+.hero-brand-text {
+  margin: 0;
+  max-width: 40ch;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
 .metric-value {
   display: block;
   margin-top: 8px;
@@ -437,56 +448,9 @@ svg {
   transition: color var(--transition);
 }
 
-.hero-qr {
-  padding: 14px;
-  align-content: start;
-  gap: 12px;
-}
-
-.hero-qr img {
-  width: 100%;
-  aspect-ratio: 1;
-  object-fit: contain;
-  border-radius: 20px;
-  background: white;
-}
-
-.hero-qr span {
-  font-size: 0.78rem;
-  line-height: 1.5;
-  color: var(--muted);
-  text-align: center;
-}
-
-.tabs {
-  padding: 14px;
-  animation: fade-up 680ms 80ms both;
-}
-
-.tab-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-}
-
-.tab-button {
-  min-height: 46px;
-}
-
-.tab-button.is-active {
-  border-color: rgba(34, 211, 238, 0.22);
-  background: linear-gradient(135deg, rgba(59, 130, 246, 0.22), rgba(34, 211, 238, 0.16));
-  color: var(--text);
-  box-shadow: 0 14px 28px rgba(34, 211, 238, 0.12);
-}
-
-.tab-panel {
+.page-section {
   display: grid;
   gap: 24px;
-}
-
-.tab-panel[hidden] {
-  display: none;
 }
 
 .section-intro {
@@ -813,8 +777,8 @@ svg {
 
 .network-display {
   display: grid;
-  grid-template-columns: minmax(0, 1.55fr) 300px;
-  gap: 18px;
+  grid-template-columns: 1fr;
+  gap: 0;
   align-items: start;
 }
 
@@ -845,6 +809,7 @@ svg {
 }
 
 .visual-output-bars {
+  margin-top: 18px;
   align-self: stretch;
 }
 
@@ -1124,10 +1089,6 @@ svg {
     grid-template-columns: 1fr;
   }
 
-  .hero-side {
-    grid-template-columns: minmax(0, 1fr) 220px;
-  }
-
   .workspace-grid,
   .network-display {
     grid-template-columns: 1fr;
@@ -1193,6 +1154,10 @@ svg {
     border-radius: 22px;
   }
 
+  .brand-logo {
+    width: 124px;
+  }
+
   .brand-copy span {
     white-space: normal;
   }
@@ -1218,7 +1183,6 @@ svg {
     padding: 22px;
   }
 
-  .hero-side,
   .draw-side {
     grid-template-columns: 1fr;
   }
@@ -1282,13 +1246,6 @@ svg {
     padding: 12px;
   }
 
-  .tabs {
-    padding: 10px;
-  }
-
-  .tab-button {
-    width: 100%;
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {

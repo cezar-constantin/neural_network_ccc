@@ -14,7 +14,7 @@ const MAX_NETWORK_ZOOM = 2.4;
 const NETWORK_ZOOM_STEP = 0.2;
 const MOBILE_BREAKPOINT = 860;
 const PHONE_BREAKPOINT = 540;
-const CONTACT_FORM_ENDPOINT = "https://formsubmit.co/ajax/cezar.chirila@helvetic-ai-compass.ch";
+const CONTACT_FORM_ENDPOINT = "https://formsubmit.co/ajax/contact@cezar-constantin-chirila.com";
 
 const COLORS = {
   ink: [248, 250, 252],
@@ -85,8 +85,6 @@ const elements = {
   zoomResetButton: document.getElementById("zoom-reset-button"),
   zoomRange: document.getElementById("zoom-range"),
   zoomValue: document.getElementById("zoom-value"),
-  tabButtons: Array.from(document.querySelectorAll(".tab-button")),
-  tabPanels: Array.from(document.querySelectorAll(".tab-panel")),
 };
 
 const drawContext = elements.drawCanvas.getContext("2d");
@@ -1144,24 +1142,6 @@ async function loadSamples() {
   }
 }
 
-function setupTabs() {
-  elements.tabButtons.forEach((button) => {
-    button.addEventListener("click", () => {
-      const target = button.dataset.tabTarget;
-      elements.tabButtons.forEach((candidate) => {
-        const isActive = candidate === button;
-        candidate.classList.toggle("is-active", isActive);
-        candidate.setAttribute("aria-selected", String(isActive));
-      });
-      elements.tabPanels.forEach((panel) => {
-        const isActive = panel.dataset.tabPanel === target;
-        panel.classList.toggle("is-active", isActive);
-        panel.hidden = !isActive;
-      });
-    });
-  });
-}
-
 function setupNetworkZoomControls() {
   elements.zoomOutButton.addEventListener("click", () => {
     state.hasUserAdjustedZoom = true;
@@ -1263,7 +1243,7 @@ async function submitContactForm(event) {
   } catch (error) {
     console.error(error);
     setContactStatus(
-      "The form could not be sent right now. Please try again in a moment or email cezar.chirila@helvetic-ai-compass.ch directly.",
+      "The form could not be sent right now. Please try again in a moment or email contact@cezar-constantin-chirila.com directly.",
       "error",
     );
   } finally {
@@ -1299,7 +1279,6 @@ async function loadModel() {
 async function initialize() {
   setupProbabilityBars();
   setupFeatureGrids();
-  setupTabs();
   setupNetworkZoomControls();
   setupResponsiveLayout();
   setupContactForm();

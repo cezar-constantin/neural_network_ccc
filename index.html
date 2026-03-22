@@ -35,7 +35,11 @@
           target="_blank"
           rel="noreferrer"
         >
-          <span class="brand-dot" aria-hidden="true"></span>
+          <img
+            class="brand-logo"
+            src="./assets/logo_dark_background.svg"
+            alt="Cezar Constantin logo"
+          />
           <span class="brand-copy">
             <strong>CCC Neural Network</strong>
             <span>Minimal, hosted neural network simulator</span>
@@ -116,6 +120,17 @@
         </div>
 
         <div class="hero-side">
+          <article class="hero-brand-card">
+            <img
+              class="hero-brand-logo"
+              src="./assets/logo_dark_background.svg"
+              alt="Cezar Constantin logo"
+            />
+            <p class="hero-brand-text">
+              Presented with the same brand language used across the main portfolio site.
+            </p>
+          </article>
+
           <div class="metric-stack">
             <article class="metric-card">
               <span class="metric-label">Model performance</span>
@@ -150,58 +165,11 @@
               </strong>
             </article>
           </div>
-
-          <a
-            class="hero-qr"
-            href="https://cezar-constantin.github.io/neural_network_ccc/"
-            target="_blank"
-            rel="noreferrer"
-            aria-label="Open the live CCC Neural Network demo"
-          >
-            <img
-              src="https://api.qrserver.com/v1/create-qr-code/?size=360x360&data=https%3A%2F%2Fcezar-constantin.github.io%2Fneural_network_ccc%2F"
-              alt="QR code for the live CCC Neural Network demo"
-            />
-            <span>Scan for the hosted version</span>
-          </a>
         </div>
       </section>
 
-      <section class="tabs card" aria-label="Content tabs">
-        <div class="tab-list" role="tablist">
-          <button
-            class="tab-button is-active"
-            id="tab-button-experience"
-            type="button"
-            role="tab"
-            aria-selected="true"
-            aria-controls="tab-panel-experience"
-            data-tab-target="experience"
-          >
-            Live simulator
-          </button>
-          <button
-            class="tab-button"
-            id="tab-button-features"
-            type="button"
-            role="tab"
-            aria-selected="false"
-            aria-controls="tab-panel-features"
-            data-tab-target="features"
-          >
-            Learned features
-          </button>
-        </div>
-      </section>
-
-      <section
-        class="tab-panel is-active"
-        id="tab-panel-experience"
-        role="tabpanel"
-        aria-labelledby="tab-button-experience"
-        data-tab-panel="experience"
-      >
-        <section class="section-intro" id="experience-section">
+      <section class="page-section" id="experience-section">
+        <section class="section-intro">
           <p class="section-kicker">Interactive demo</p>
           <h2>See the network interpret every stroke.</h2>
           <p>
@@ -380,29 +348,32 @@
                   <svg id="network-svg" viewBox="0 0 1420 980" role="img" aria-label="Neural network visualization"></svg>
                 </div>
               </div>
-
-              <section class="visual-output-bars" aria-label="Output probabilities">
-                <p class="card-kicker">Output layer</p>
-                <h3>Digit probabilities</h3>
-                <p class="confidence-line">
-                  The bars below mirror the final ten output neurons and update after each stroke or sample change.
-                </p>
-                <div class="probability-bars" id="probability-bars" aria-live="polite"></div>
-              </section>
             </div>
           </div>
+
+          <section class="visual-output-bars" aria-label="Output probabilities">
+            <p class="card-kicker">Output layer</p>
+            <h3>Digit probabilities</h3>
+            <p class="confidence-line">
+              This probability panel is shown separately from the network diagram so the final class scores can be read
+              clearly without sitting on top of the output-neuron view.
+            </p>
+            <div class="probability-bars" id="probability-bars" aria-live="polite"></div>
+          </section>
         </section>
       </section>
 
-      <section
-        class="tab-panel"
-        id="tab-panel-features"
-        role="tabpanel"
-        aria-labelledby="tab-button-features"
-        data-tab-panel="features"
-        hidden
-      >
-        <section class="card feature-overview" id="features-section">
+      <section class="page-section" id="features-section">
+        <section class="section-intro">
+          <p class="section-kicker">Feature maps</p>
+          <h2>Inspect the patterns each layer has learned.</h2>
+          <p>
+            These learned filters show how the hidden layers transition from simple local stroke detection to broader
+            digit-part representations.
+          </p>
+        </section>
+
+        <section class="card feature-overview">
           <div class="section-heading">
             <div>
               <p class="section-kicker">Feature maps</p>
@@ -470,6 +441,8 @@
           </div>
 
           <p class="helper-copy contact-copy">
+            Messages sent through this form go to
+            <a href="mailto:contact@cezar-constantin-chirila.com">contact@cezar-constantin-chirila.com</a>.
             For broader work across AI, risk, and decision systems, visit
             <a href="https://www.cezar-constantin-chirila.com/" target="_blank" rel="noreferrer">
               www.cezar-constantin-chirila.com
