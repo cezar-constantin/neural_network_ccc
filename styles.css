@@ -85,7 +85,7 @@ svg {
 .page-shell {
   position: relative;
   z-index: 1;
-  width: min(1280px, calc(100vw - 32px));
+  width: min(1440px, calc(100vw - 32px));
   margin: 18px auto 72px;
   display: grid;
   gap: 24px;
@@ -248,6 +248,11 @@ svg {
   gap: 16px;
 }
 
+.hero-main {
+  width: 100%;
+  max-width: none;
+}
+
 .eyebrow,
 .section-kicker,
 .card-kicker,
@@ -276,8 +281,10 @@ svg {
 }
 
 .hero h1 {
-  max-width: 14ch;
+  width: 100%;
+  max-width: none;
   font-size: clamp(3.1rem, 8vw, 5.8rem);
+  text-wrap: balance;
 }
 
 .hero-text,
@@ -299,7 +306,8 @@ svg {
 }
 
 .hero-text {
-  max-width: 88ch;
+  width: 100%;
+  max-width: none;
   font-size: 1.08rem;
   line-height: 1.8;
 }
@@ -313,7 +321,8 @@ svg {
 }
 
 .hero-performance {
-  max-width: 88ch;
+  width: 100%;
+  max-width: none;
 }
 
 .controls,
@@ -413,7 +422,8 @@ svg {
 
 .section-intro {
   padding: 8px 4px 0;
-  max-width: 1100px;
+  width: 100%;
+  max-width: none;
   display: grid;
   gap: 12px;
   animation: fade-up 720ms 120ms both;
@@ -421,11 +431,14 @@ svg {
 
 .section-intro h2 {
   font-size: clamp(2rem, 4vw, 3.15rem);
+  max-width: none;
+  text-wrap: balance;
 }
 
 .section-intro p {
   font-size: 1.02rem;
-  max-width: 90ch;
+  width: 100%;
+  max-width: none;
 }
 
 .section-heading {
