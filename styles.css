@@ -276,7 +276,7 @@ svg {
 }
 
 .hero h1 {
-  max-width: 10ch;
+  max-width: 14ch;
   font-size: clamp(3.1rem, 8vw, 5.8rem);
 }
 
@@ -299,7 +299,7 @@ svg {
 }
 
 .hero-text {
-  max-width: 60ch;
+  max-width: 88ch;
   font-size: 1.08rem;
   line-height: 1.8;
 }
@@ -310,6 +310,10 @@ svg {
 .contact-copy,
 .section-intro p {
   line-height: 1.75;
+}
+
+.hero-performance {
+  max-width: 88ch;
 }
 
 .controls,
@@ -409,7 +413,7 @@ svg {
 
 .section-intro {
   padding: 8px 4px 0;
-  max-width: 720px;
+  max-width: 1100px;
   display: grid;
   gap: 12px;
   animation: fade-up 720ms 120ms both;
@@ -421,6 +425,7 @@ svg {
 
 .section-intro p {
   font-size: 1.02rem;
+  max-width: 90ch;
 }
 
 .section-heading {
