@@ -497,7 +497,7 @@ svg {
 
 .simulator-layout-grid {
   display: grid;
-  grid-template-columns: minmax(360px, 0.7fr) minmax(0, 1.3fr);
+  grid-template-columns: minmax(280px, 0.36fr) minmax(0, 1.64fr);
   gap: 24px;
   align-items: start;
 }
@@ -510,6 +510,7 @@ svg {
 .description-explain-grid,
 .panel-column,
 .simulator-activation-column,
+.simulator-output-stack,
 .neurons-map-stack {
   display: grid;
   gap: 24px;
@@ -521,6 +522,12 @@ svg {
   display: grid;
   gap: 18px;
   align-content: start;
+}
+
+.simulator-input-panel {
+  width: 100%;
+  max-width: 440px;
+  justify-self: start;
 }
 
 .simulator-panel-heading {
@@ -1197,6 +1204,11 @@ svg {
 
   .visual-output-bars {
     max-width: none;
+  }
+
+  .simulator-input-panel {
+    max-width: none;
+    justify-self: stretch;
   }
 }
 
