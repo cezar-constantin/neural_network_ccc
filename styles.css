@@ -447,6 +447,9 @@ svg {
 .tab-panel {
   padding: 30px;
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  justify-items: stretch;
+  align-items: start;
   gap: 24px;
   animation: fade-up 720ms 220ms both;
 }
@@ -499,11 +502,14 @@ svg {
 
 .description-narrative {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  width: 100%;
   gap: 22px;
 }
 
 .description-block {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: 12px;
   width: 100%;
   max-width: none;
