@@ -1058,21 +1058,11 @@ function setNetworkZoom(nextZoom) {
   const percentage = Math.round(zoom * 100);
 
   elements.networkVisualFrame.style.width = `${percentage}%`;
-  if (elements.zoomRange) {
-    elements.zoomRange.value = String(percentage);
-  }
-  if (elements.zoomValue) {
-    elements.zoomValue.textContent = `${percentage}%`;
-  }
-  if (elements.zoomOutButton) {
-    elements.zoomOutButton.disabled = zoom <= MIN_NETWORK_ZOOM + 1e-9;
-  }
-  if (elements.zoomInButton) {
-    elements.zoomInButton.disabled = zoom >= MAX_NETWORK_ZOOM - 1e-9;
-  }
-  if (elements.zoomResetButton) {
-    elements.zoomResetButton.disabled = Math.abs(zoom - 1) < 1e-9;
-  }
+  elements.zoomRange.value = String(percentage);
+  elements.zoomValue.textContent = `${percentage}%`;
+  elements.zoomOutButton.disabled = zoom <= MIN_NETWORK_ZOOM + 1e-9;
+  elements.zoomInButton.disabled = zoom >= MAX_NETWORK_ZOOM - 1e-9;
+  elements.zoomResetButton.disabled = Math.abs(zoom - 1) < 1e-9;
 }
 
 function getDefaultNetworkZoom() {
@@ -1215,11 +1205,6 @@ async function loadSamples() {
 }
 
 function setupNetworkZoomControls() {
-  if (!elements.zoomOutButton || !elements.zoomInButton || !elements.zoomResetButton || !elements.zoomRange) {
-    syncResponsiveUi(true);
-    return;
-  }
-
   elements.zoomOutButton.addEventListener("click", () => {
     state.hasUserAdjustedZoom = true;
     const nextZoom = Number(elements.zoomRange.value) / 100 - NETWORK_ZOOM_STEP;
