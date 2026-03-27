@@ -254,6 +254,18 @@
               </section>
 
               <div class="simulator-activation-column">
+                <article class="output-summary-card empty-state" id="output-summary-card">
+                  <p class="card-kicker">Current prediction</p>
+                  <div class="prediction-header">
+                    <div class="prediction-digit" id="prediction-digit">?</div>
+                    <div class="prediction-copy">
+                      <p class="confidence-line">Estimated digit</p>
+                      <h3 id="prediction-label">Waiting for your drawing</h3>
+                      <p class="confidence-line" id="prediction-confidence">Confidence: 0%</p>
+                    </div>
+                  </div>
+                </article>
+
                 <section class="panel-surface simulator-network-stage">
                   <div class="section-heading simulator-panel-heading">
                     <div>
@@ -323,29 +335,15 @@
                   </div>
                 </section>
 
-                <div class="simulator-output-stack">
-                  <article class="output-summary-card empty-state" id="output-summary-card">
-                    <p class="card-kicker">Current prediction</p>
-                    <div class="prediction-header">
-                      <div class="prediction-digit" id="prediction-digit">?</div>
-                      <div class="prediction-copy">
-                        <p class="confidence-line">Estimated digit</p>
-                        <h3 id="prediction-label">Waiting for your drawing</h3>
-                        <p class="confidence-line" id="prediction-confidence">Confidence: 0%</p>
-                      </div>
-                    </div>
-                  </article>
-
-                  <section class="visual-output-bars" aria-label="Output probabilities">
-                    <p class="card-kicker">Output layer</p>
-                    <h3>Digit probabilities</h3>
-                    <p class="confidence-line">
-                      This probability panel is shown separately from the network diagram so the final class scores can
-                      be read clearly without sitting on top of the output-neuron view.
-                    </p>
-                    <div class="probability-bars" id="probability-bars" aria-live="polite"></div>
-                  </section>
-                </div>
+                <section class="visual-output-bars" aria-label="Output probabilities">
+                  <p class="card-kicker">Output layer</p>
+                  <h3>Digit probabilities</h3>
+                  <p class="confidence-line">
+                    This probability panel is shown separately from the network diagram so the final class scores can
+                    be read clearly without sitting on top of the output-neuron view.
+                  </p>
+                  <div class="probability-bars" id="probability-bars" aria-live="polite"></div>
+                </section>
               </div>
             </div>
           </section>

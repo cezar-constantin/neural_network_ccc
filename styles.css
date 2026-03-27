@@ -582,7 +582,6 @@ svg {
 .description-explain-grid,
 .panel-column,
 .simulator-activation-column,
-.simulator-output-stack,
 .neurons-map-stack {
   display: grid;
   gap: 24px;
