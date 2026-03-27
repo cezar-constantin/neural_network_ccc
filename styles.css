@@ -456,7 +456,9 @@ svg {
 }
 
 .tab-panel-copy {
-  max-width: 100ch;
+  width: 100%;
+  max-width: none;
+  text-wrap: normal;
 }
 
 .tab-button {
@@ -503,7 +505,8 @@ svg {
 .description-block {
   display: grid;
   gap: 12px;
-  max-width: 122ch;
+  width: 100%;
+  max-width: none;
 }
 
 .description-block + .description-block {
@@ -518,14 +521,17 @@ svg {
   font-size: clamp(1.3rem, 2vw, 1.8rem);
   line-height: 1.08;
   letter-spacing: -0.02em;
+  max-width: none;
+  text-wrap: normal;
 }
 
 .description-block p {
   margin: 0;
-  max-width: 110ch;
+  width: 100%;
+  max-width: none;
   color: var(--muted);
   line-height: 1.85;
-  text-wrap: pretty;
+  text-wrap: normal;
 }
 
 .description-block strong {
