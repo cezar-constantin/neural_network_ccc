@@ -85,7 +85,7 @@ svg {
 .page-shell {
   position: relative;
   z-index: 1;
-  width: min(1440px, calc(100vw - 32px));
+  width: min(2448px, calc(100vw - 32px));
   margin: 18px auto 72px;
   display: grid;
   gap: 24px;
@@ -490,10 +490,16 @@ svg {
 }
 
 .tab-description-grid,
-.simulator-top-grid,
 .feature-sections {
   display: grid;
   gap: 24px;
+}
+
+.simulator-layout-grid {
+  display: grid;
+  grid-template-columns: minmax(360px, 0.7fr) minmax(0, 1.3fr);
+  gap: 24px;
+  align-items: start;
 }
 
 .tab-description-grid {
@@ -503,20 +509,29 @@ svg {
 
 .description-explain-grid,
 .panel-column,
-.simulator-side-stack,
+.simulator-activation-column,
 .neurons-map-stack {
   display: grid;
-  gap: 16px;
+  gap: 24px;
 }
 
-.simulator-top-grid {
-  grid-template-columns: minmax(0, 1.06fr) minmax(320px, 0.94fr);
-  align-items: start;
-}
-
+.simulator-input-panel,
+.simulator-controls-panel,
 .simulator-network-stage {
   display: grid;
-  gap: 0;
+  gap: 18px;
+  align-content: start;
+}
+
+.simulator-panel-heading {
+  align-items: center;
+}
+
+.draw-below-grid {
+  display: grid;
+  grid-template-columns: 228px minmax(0, 1fr);
+  gap: 18px;
+  align-items: start;
 }
 
 .neurons-map-stack {
@@ -591,13 +606,6 @@ svg {
 .support-card,
 .disclaimer-card {
   animation-delay: 160ms;
-}
-
-.draw-stage {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) 240px;
-  gap: 18px;
-  align-items: start;
 }
 
 .canvas-frame {
@@ -675,8 +683,13 @@ svg {
   flex: 1 1 100%;
 }
 
-.briefing-panel {
-  align-content: start;
+.simulator-controls {
+  align-items: stretch;
+}
+
+.simulator-controls .primary-button,
+.simulator-controls .secondary-button {
+  flex: 1 1 auto;
 }
 
 .briefing-card,
@@ -894,7 +907,8 @@ svg {
   align-self: stretch;
 }
 
-.simulator-side-stack .visual-output-bars {
+.simulator-activation-column .visual-output-bars,
+.simulator-activation-column .output-summary-card {
   margin-top: 0;
 }
 
@@ -1174,8 +1188,8 @@ svg {
     grid-template-columns: 1fr;
   }
 
+  .simulator-layout-grid,
   .tab-description-grid,
-  .simulator-top-grid,
   .workspace-grid,
   .network-display {
     grid-template-columns: 1fr;
@@ -1209,17 +1223,8 @@ svg {
     padding: 32px;
   }
 
-  .draw-stage {
+  .draw-below-grid {
     grid-template-columns: 1fr;
-  }
-
-  .draw-side {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    align-items: start;
-  }
-
-  .mini-preview {
-    grid-column: 1 / -1;
   }
 
   .explain-grid,
@@ -1269,10 +1274,6 @@ svg {
   .support-card,
   .disclaimer-card {
     padding: 22px;
-  }
-
-  .draw-side {
-    grid-template-columns: 1fr;
   }
 
   .hero h1 {

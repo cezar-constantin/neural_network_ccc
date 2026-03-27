@@ -243,26 +243,14 @@
             data-tab-panel="simulator"
             hidden
           >
-            <div class="section-heading">
-              <div>
-                <p class="section-kicker">Simulator</p>
-                <h2>Draw a digit and inspect the live network response.</h2>
-              </div>
-              <span class="status-pill" id="input-status">Live prediction</span>
-            </div>
-
-            <p class="helper-copy tab-panel-copy">
-              The drawing surface, normalized preview, prediction card, probability bars, and activation diagram stay
-              synchronized so the network remains readable while you sketch.
-            </p>
-
-            <div class="simulator-top-grid">
-              <section class="panel-surface">
-                <div class="section-heading">
+            <div class="simulator-layout-grid">
+              <section class="panel-surface simulator-input-panel">
+                <div class="section-heading simulator-panel-heading">
                   <div>
                     <p class="section-kicker">Input studio</p>
                     <h2>Draw a digit</h2>
                   </div>
+                  <span class="status-pill" id="input-status">Live prediction</span>
                 </div>
 
                 <p class="helper-copy">
@@ -271,36 +259,30 @@
                   inference.
                 </p>
 
-                <div class="draw-stage">
-                  <div class="canvas-frame">
-                    <canvas id="draw-canvas" width="560" height="560" aria-label="Drawing area"></canvas>
-                    <div class="pixel-grid" aria-hidden="true"></div>
+                <div class="canvas-frame">
+                  <canvas id="draw-canvas" width="560" height="560" aria-label="Drawing area"></canvas>
+                  <div class="pixel-grid" aria-hidden="true"></div>
+                </div>
+
+                <div class="draw-below-grid">
+                  <div class="mini-preview">
+                    <div class="preview-label">
+                      <span>Normalized input</span>
+                      <strong>28x28 image seen by the model</strong>
+                    </div>
+                    <canvas id="normalized-canvas" width="28" height="28" aria-label="Normalized 28x28 input"></canvas>
                   </div>
 
-                  <div class="draw-side">
-                    <div class="mini-preview">
-                      <div class="preview-label">
-                        <span>Normalized input</span>
-                        <strong>28x28 image seen by the model</strong>
-                      </div>
-                      <canvas id="normalized-canvas" width="28" height="28" aria-label="Normalized 28x28 input"></canvas>
-                    </div>
-
-                    <div class="controls">
+                  <div class="simulator-controls-panel">
+                    <div class="controls simulator-controls">
                       <button class="primary-button" id="clear-button" type="button">Clear canvas</button>
                       <button class="secondary-button" id="sample-button" type="button">Try MNIST sample</button>
                     </div>
-
-                    <article class="briefing-card">
-                      <p class="card-kicker">Tip</p>
-                      <h3>Draw boldly and keep the digit centered.</h3>
-                      <p>Closed loops and strong stroke contrast usually make the layer activations easier to read.</p>
-                    </article>
                   </div>
                 </div>
               </section>
 
-              <aside class="simulator-side-stack">
+              <div class="simulator-activation-column">
                 <article class="output-summary-card empty-state" id="output-summary-card">
                   <p class="card-kicker">Current prediction</p>
                   <div class="prediction-header">
@@ -313,6 +295,75 @@
                   </div>
                 </article>
 
+                <section class="panel-surface simulator-network-stage">
+                  <div class="section-heading simulator-panel-heading">
+                    <div>
+                      <p class="section-kicker">Activation map</p>
+                      <h2>Neuron activation</h2>
+                    </div>
+
+                    <div class="network-toolbar" aria-label="Chart zoom controls">
+                      <span class="zoom-label">Zoom</span>
+                      <button class="zoom-button" id="zoom-out-button" type="button" aria-label="Zoom out">-</button>
+                      <input
+                        class="zoom-range"
+                        id="zoom-range"
+                        type="range"
+                        min="100"
+                        max="240"
+                        step="10"
+                        value="100"
+                        aria-label="Neuron activation zoom"
+                      />
+                      <button class="zoom-button" id="zoom-in-button" type="button" aria-label="Zoom in">+</button>
+                      <button class="zoom-reset-button" id="zoom-reset-button" type="button">Reset</button>
+                      <strong class="zoom-value" id="zoom-value">100%</strong>
+                    </div>
+                  </div>
+
+                  <p class="helper-copy network-hint">
+                    Use the zoom controls to inspect dense regions of the diagram. On smaller screens, swipe
+                    horizontally inside the network frame to explore the full path from input pixels to final
+                    probabilities.
+                  </p>
+
+                  <section class="connection-legend" aria-label="Connection line explanation">
+                    <article class="connection-legend-item">
+                      <span class="connection-line-swatch is-positive" aria-hidden="true"></span>
+                      <div class="connection-legend-copy">
+                        <strong>Electric blue</strong>
+                        <p>Positive weights increase the next neuron's response when the source neuron is active.</p>
+                      </div>
+                    </article>
+
+                    <article class="connection-legend-item">
+                      <span class="connection-line-swatch is-negative" aria-hidden="true"></span>
+                      <div class="connection-legend-copy">
+                        <strong>Amber contrast</strong>
+                        <p>Negative weights pull the next neuron down and weaken that connection path.</p>
+                      </div>
+                    </article>
+
+                    <article class="connection-legend-item">
+                      <span class="connection-line-swatch is-visibility" aria-hidden="true"></span>
+                      <div class="connection-legend-copy">
+                        <strong>Opacity and width</strong>
+                        <p>Brighter, thicker edges indicate stronger active influence through the current prediction pass.</p>
+                      </div>
+                    </article>
+                  </section>
+
+                  <div class="network-shell">
+                    <div class="network-display">
+                      <div class="network-visual-scroll">
+                        <div class="network-visual-frame" id="network-visual-frame">
+                          <svg id="network-svg" viewBox="0 0 1420 980" role="img" aria-label="Neural network visualization"></svg>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </section>
+
                 <section class="visual-output-bars" aria-label="Output probabilities">
                   <p class="card-kicker">Output layer</p>
                   <h3>Digit probabilities</h3>
@@ -322,76 +373,8 @@
                   </p>
                   <div class="probability-bars" id="probability-bars" aria-live="polite"></div>
                 </section>
-              </aside>
+              </div>
             </div>
-
-            <section class="panel-surface simulator-network-stage">
-              <div class="section-heading">
-                <div>
-                  <p class="section-kicker">Activation map</p>
-                  <h2>Neuron activation</h2>
-                </div>
-
-                <div class="network-toolbar" aria-label="Chart zoom controls">
-                  <span class="zoom-label">Zoom</span>
-                  <button class="zoom-button" id="zoom-out-button" type="button" aria-label="Zoom out">-</button>
-                  <input
-                    class="zoom-range"
-                    id="zoom-range"
-                    type="range"
-                    min="100"
-                    max="240"
-                    step="10"
-                    value="100"
-                    aria-label="Neuron activation zoom"
-                  />
-                  <button class="zoom-button" id="zoom-in-button" type="button" aria-label="Zoom in">+</button>
-                  <button class="zoom-reset-button" id="zoom-reset-button" type="button">Reset</button>
-                  <strong class="zoom-value" id="zoom-value">100%</strong>
-                </div>
-              </div>
-
-              <p class="helper-copy network-hint">
-                Use the zoom controls to inspect dense regions of the diagram. On smaller screens, swipe horizontally
-                inside the network frame to explore the full path from input pixels to final probabilities.
-              </p>
-
-              <section class="connection-legend" aria-label="Connection line explanation">
-                <article class="connection-legend-item">
-                  <span class="connection-line-swatch is-positive" aria-hidden="true"></span>
-                  <div class="connection-legend-copy">
-                    <strong>Electric blue</strong>
-                    <p>Positive weights increase the next neuron's response when the source neuron is active.</p>
-                  </div>
-                </article>
-
-                <article class="connection-legend-item">
-                  <span class="connection-line-swatch is-negative" aria-hidden="true"></span>
-                  <div class="connection-legend-copy">
-                    <strong>Amber contrast</strong>
-                    <p>Negative weights pull the next neuron down and weaken that connection path.</p>
-                  </div>
-                </article>
-
-                <article class="connection-legend-item">
-                  <span class="connection-line-swatch is-visibility" aria-hidden="true"></span>
-                  <div class="connection-legend-copy">
-                    <strong>Opacity and width</strong>
-                    <p>Brighter, thicker edges indicate stronger active influence through the current prediction pass.</p>
-                  </div>
-                </article>
-              </section>
-
-              <div class="network-shell">
-                <div class="network-display">
-                  <div class="network-visual-scroll">
-                    <div class="network-visual-frame" id="network-visual-frame">
-                      <svg id="network-svg" viewBox="0 0 1420 980" role="img" aria-label="Neural network visualization"></svg>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </section>
           </section>
 
           <section
