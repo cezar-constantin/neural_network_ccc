@@ -496,6 +496,13 @@ svg {
   gap: 24px;
 }
 
+.simulator-stage-layout {
+  display: grid;
+  grid-template-columns: minmax(320px, 0.72fr) minmax(0, 1.28fr);
+  gap: 24px;
+  align-items: start;
+}
+
 .tab-description-grid {
   grid-template-columns: repeat(2, minmax(0, 1fr));
   align-items: start;
@@ -507,6 +514,77 @@ svg {
 .neurons-map-stack {
   display: grid;
   gap: 16px;
+}
+
+.simulator-input-panel,
+.simulator-activation-panel,
+.simulator-input-actions {
+  display: grid;
+  gap: 18px;
+  align-content: start;
+}
+
+.simulator-panel-heading {
+  align-items: center;
+}
+
+.simulator-input-footer {
+  display: grid;
+  grid-template-columns: 180px minmax(0, 1fr);
+  gap: 16px;
+  align-items: start;
+}
+
+.simulator-preview-card {
+  align-content: start;
+  min-height: 0;
+}
+
+.simulator-preview-card #normalized-canvas {
+  max-width: 110px;
+}
+
+.simulator-controls {
+  align-items: center;
+}
+
+.controls.simulator-controls .primary-button,
+.controls.simulator-controls .secondary-button {
+  flex: 1 1 auto;
+  width: auto;
+}
+
+.simulator-tip-copy {
+  max-width: 32ch;
+  font-size: 0.92rem;
+}
+
+.simulator-insight-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.simulator-insight-card,
+.simulator-output-card {
+  min-height: 166px;
+}
+
+.simulator-output-card .prediction-header {
+  align-items: center;
+}
+
+.simulator-output-card .prediction-digit {
+  flex: 0 0 76px;
+  width: 76px;
+  height: 76px;
+  border-radius: 24px;
+  font-size: 2.2rem;
+}
+
+.simulator-output-card .prediction-copy h3 {
+  font-size: clamp(1.7rem, 2.6vw, 2.4rem);
+  line-height: 0.92;
 }
 
 .simulator-top-grid {
@@ -898,6 +976,11 @@ svg {
   margin-top: 0;
 }
 
+.simulator-activation-panel .network-shell,
+.simulator-activation-panel .visual-output-bars {
+  margin-top: 0;
+}
+
 .probability-bars {
   display: grid;
   gap: 12px;
@@ -1174,6 +1257,7 @@ svg {
     grid-template-columns: 1fr;
   }
 
+  .simulator-stage-layout,
   .tab-description-grid,
   .simulator-top-grid,
   .workspace-grid,
@@ -1210,6 +1294,11 @@ svg {
   }
 
   .draw-stage {
+    grid-template-columns: 1fr;
+  }
+
+  .simulator-input-footer,
+  .simulator-insight-grid {
     grid-template-columns: 1fr;
   }
 
@@ -1272,6 +1361,10 @@ svg {
   }
 
   .draw-side {
+    grid-template-columns: 1fr;
+  }
+
+  .simulator-input-footer {
     grid-template-columns: 1fr;
   }
 
