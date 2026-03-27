@@ -148,89 +148,80 @@
                 <p class="section-kicker">Description</p>
                 <h2>How the simulator and the network are organized.</h2>
               </div>
-              <span class="status-pill">6 explanation cards</span>
+              <span class="status-pill">Plain-language walkthrough</span>
             </div>
 
             <p class="helper-copy tab-panel-copy">
-              This view combines the pipeline readout and the activation-layer explanation so the full inference story
-              can be scanned before jumping into the live simulator.
+              This tab gives a more direct explanation of what the simulator is doing, why the network behaves the way
+              it does, and how to interpret what you see on the screen.
             </p>
 
-            <div class="tab-description-grid">
-              <section class="panel-surface panel-column">
-                <div class="section-heading">
-                  <div>
-                    <p class="section-kicker">Readout</p>
-                    <h2>From drawing to decision</h2>
-                  </div>
-                </div>
-
-                <div class="briefing-list">
-                  <article class="briefing-card">
-                    <p class="card-kicker">Stage 1</p>
-                    <h3>From sketch to tensor</h3>
-                    <p>
-                      The handwritten canvas is compressed into a centered 28x28 grayscale signal, then flattened into
-                      784 inputs.
-                    </p>
-                  </article>
-
-                  <article class="briefing-card">
-                    <p class="card-kicker">Stage 2</p>
-                    <h3>Hidden layers form structure</h3>
-                    <p>
-                      Early neurons respond to local strokes, while the second hidden layer combines them into
-                      digit-like parts.
-                    </p>
-                  </article>
-
-                  <article class="briefing-card">
-                    <p class="card-kicker">Stage 3</p>
-                    <h3>Output probabilities settle the guess</h3>
-                    <p>
-                      The ten output neurons compete through softmax, producing a probability distribution over digits 0
-                      through 9.
-                    </p>
-                  </article>
-                </div>
+            <div class="description-narrative">
+              <section class="description-block">
+                <p class="card-kicker">Step 1</p>
+                <h3>Your drawing is cleaned up before the model sees it.</h3>
+                <p>
+                  When you draw a digit in the simulator, the network does not look at the raw canvas exactly as it
+                  appears on the screen. The drawing is first centered, resized, and converted into a compact 28x28
+                  grayscale image so the input matches the format used during training.
+                </p>
+                <p>
+                  In simple terms, the simulator takes your sketch, removes the extra empty space around it, and turns
+                  it into a standardized version of the digit. That preprocessing step is important because it gives
+                  the model a cleaner and more consistent signal to work with.
+                </p>
               </section>
 
-              <section class="panel-surface panel-column">
-                <div class="section-heading">
-                  <div>
-                    <p class="section-kicker">Layer guide</p>
-                    <h2>What each activation stage means</h2>
-                  </div>
-                </div>
+              <section class="description-block">
+                <p class="card-kicker">Step 2</p>
+                <h3>The hidden layers look for meaningful shapes inside the digit.</h3>
+                <p>
+                  Once the 28x28 image is prepared, it is flattened into 784 numeric values. Those values flow into
+                  the first hidden layer, where neurons start reacting to small visual patterns such as short lines,
+                  diagonals, edges, corners, stroke endings, and simple curves.
+                </p>
+                <p>
+                  The second hidden layer builds on that information. Instead of reacting to tiny stroke fragments, it
+                  starts combining them into larger parts that resemble the structure of real digits, such as loops,
+                  bars, hooks, curves, and partial circles.
+                </p>
+              </section>
 
-                <div class="description-explain-grid">
-                  <article class="explain-card">
-                    <p class="card-kicker">Input layer</p>
-                    <h3>Every bright pixel becomes an activation.</h3>
-                    <p>
-                      After normalization, the sketch is flattened into 784 scalar values that seed the rest of the
-                      network.
-                    </p>
-                  </article>
+              <section class="description-block">
+                <p class="card-kicker">Step 3</p>
+                <h3>The output layer turns those patterns into a final guess.</h3>
+                <p>
+                  At the end of the process, the output layer compares ten possible classes: the digits 0 through 9.
+                  Each output neuron produces a score, and those scores are converted into probabilities through a
+                  softmax calculation.
+                </p>
+                <p>
+                  That means the simulator does not simply say, "this is a 7." Instead, it assigns a probability to
+                  every digit and then highlights the most likely answer. This makes it easier to see when the model is
+                  highly confident and when it is uncertain between two similar-looking digits.
+                </p>
+              </section>
 
-                  <article class="explain-card">
-                    <p class="card-kicker">Hidden layer 1</p>
-                    <h3>Stroke detectors come online first.</h3>
-                    <p>
-                      These neurons respond to local diagonals, terminals, bends, corners, and simple stroke pressure
-                      patterns.
-                    </p>
-                  </article>
-
-                  <article class="explain-card">
-                    <p class="card-kicker">Hidden layer 2</p>
-                    <h3>Those strokes combine into digit parts.</h3>
-                    <p>
-                      Curves, loops, bars, and partial circles emerge here before the output layer turns them into a
-                      class decision.
-                    </p>
-                  </article>
-                </div>
+              <section class="description-block">
+                <p class="card-kicker">How to read the simulator</p>
+                <h3>What each visual area is showing you.</h3>
+                <p>
+                  <strong>Input layer.</strong> This is the normalized 28x28 version of your drawing. Every bright
+                  pixel becomes a numeric activation that enters the network.
+                </p>
+                <p>
+                  <strong>Hidden layer 1.</strong> These neurons react to basic stroke fragments and local visual
+                  features. You can think of them as simple detectors for small parts of the digit.
+                </p>
+                <p>
+                  <strong>Hidden layer 2.</strong> These neurons combine the earlier signals into larger digit-like
+                  structures, making the network's internal understanding more abstract and more useful for
+                  classification.
+                </p>
+                <p>
+                  <strong>Output layer.</strong> This is where the model produces the final probability distribution
+                  across digits 0 to 9, showing both the best guess and the confidence behind it.
+                </p>
               </section>
             </div>
           </section>

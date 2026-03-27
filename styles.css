@@ -495,6 +495,43 @@ svg {
   gap: 24px;
 }
 
+.description-narrative {
+  display: grid;
+  gap: 22px;
+}
+
+.description-block {
+  display: grid;
+  gap: 12px;
+  max-width: 122ch;
+}
+
+.description-block + .description-block {
+  padding-top: 22px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.description-block h3 {
+  margin: 0;
+  font-family: "Space Grotesk", sans-serif;
+  color: var(--text);
+  font-size: clamp(1.3rem, 2vw, 1.8rem);
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+}
+
+.description-block p {
+  margin: 0;
+  max-width: 110ch;
+  color: var(--muted);
+  line-height: 1.85;
+  text-wrap: pretty;
+}
+
+.description-block strong {
+  color: var(--text);
+}
+
 .simulator-layout-grid {
   display: grid;
   grid-template-columns: minmax(280px, 0.36fr) minmax(0, 1.64fr);
