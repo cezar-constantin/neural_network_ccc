@@ -454,6 +454,11 @@ svg {
   animation: fade-up 720ms 220ms both;
 }
 
+.tab-panel[data-tab-panel="description"] {
+  width: 100%;
+  grid-template-columns: minmax(0, 1fr);
+}
+
 .tab-panel[hidden] {
   display: none;
 }
@@ -505,6 +510,18 @@ svg {
   grid-template-columns: minmax(0, 1fr);
   width: 100%;
   gap: 22px;
+}
+
+.description-header {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  justify-content: start;
+  width: 100%;
+}
+
+.description-header > div {
+  width: 100%;
+  max-width: none;
 }
 
 .description-block {
