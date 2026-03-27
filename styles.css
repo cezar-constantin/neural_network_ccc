@@ -176,6 +176,11 @@ svg {
   color: var(--muted);
 }
 
+.nav-link.is-active {
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.04);
+}
+
 .nav-link:hover,
 .header-chip:hover,
 .contact-copy a:hover {
@@ -395,6 +400,7 @@ svg {
 .explain-card,
 .connection-legend-item,
 .visual-output-bars,
+.panel-surface,
 .feature-card,
 .legend-item,
 .field-card {
@@ -422,6 +428,101 @@ svg {
   gap: 24px;
 }
 
+.tabs {
+  padding: 14px;
+  animation: fade-up 720ms 160ms both;
+}
+
+.tab-list {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.tab-panels {
+  display: grid;
+  gap: 24px;
+}
+
+.tab-panel {
+  padding: 30px;
+  display: grid;
+  gap: 24px;
+  animation: fade-up 720ms 220ms both;
+}
+
+.tab-panel[hidden] {
+  display: none;
+}
+
+.tab-panel-copy {
+  max-width: 100ch;
+}
+
+.tab-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 0 18px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--ink);
+  font-weight: 700;
+  transition:
+    transform var(--transition),
+    border-color var(--transition),
+    background var(--transition),
+    box-shadow var(--transition),
+    color var(--transition);
+}
+
+.tab-button:hover {
+  transform: translateY(-1px);
+}
+
+.tab-button.is-active {
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.24), rgba(34, 211, 238, 0.18));
+  color: var(--text);
+  border-color: rgba(34, 211, 238, 0.22);
+  box-shadow: 0 18px 36px rgba(34, 211, 238, 0.16);
+}
+
+.tab-description-grid,
+.simulator-top-grid,
+.feature-sections {
+  display: grid;
+  gap: 24px;
+}
+
+.tab-description-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: start;
+}
+
+.description-explain-grid,
+.panel-column,
+.simulator-side-stack,
+.neurons-map-stack {
+  display: grid;
+  gap: 16px;
+}
+
+.simulator-top-grid {
+  grid-template-columns: minmax(0, 1.06fr) minmax(320px, 0.94fr);
+  align-items: start;
+}
+
+.simulator-network-stage {
+  display: grid;
+  gap: 0;
+}
+
+.neurons-map-stack {
+  gap: 24px;
+}
+
 .section-intro {
   padding: 8px 4px 0;
   width: 100%;
@@ -434,7 +535,8 @@ svg {
 .section-intro h2 {
   font-size: clamp(2rem, 4vw, 3.15rem);
   max-width: none;
-  white-space: nowrap;
+  white-space: normal;
+  text-wrap: balance;
 }
 
 .section-intro p {
@@ -584,6 +686,10 @@ svg {
 .visual-output-bars,
 .legend-item {
   padding: 20px;
+}
+
+.panel-surface {
+  padding: 24px;
 }
 
 .briefing-card h3,
@@ -786,6 +892,10 @@ svg {
 .visual-output-bars {
   margin-top: 18px;
   align-self: stretch;
+}
+
+.simulator-side-stack .visual-output-bars {
+  margin-top: 0;
 }
 
 .probability-bars {
@@ -1064,6 +1174,8 @@ svg {
     grid-template-columns: 1fr;
   }
 
+  .tab-description-grid,
+  .simulator-top-grid,
   .workspace-grid,
   .network-display {
     grid-template-columns: 1fr;
@@ -1148,6 +1260,7 @@ svg {
   }
 
   .hero,
+  .tab-panel,
   .draw-panel,
   .briefing-panel,
   .network-panel,
@@ -1183,6 +1296,19 @@ svg {
   .controls,
   .contact-form-actions {
     flex-direction: column;
+  }
+
+  .tabs {
+    padding: 12px;
+  }
+
+  .tab-button {
+    flex: 1 1 100%;
+    width: 100%;
+  }
+
+  .panel-surface {
+    padding: 20px;
   }
 
   .primary-button,

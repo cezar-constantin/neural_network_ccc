@@ -15,6 +15,7 @@ const NETWORK_ZOOM_STEP = 0.2;
 const MOBILE_BREAKPOINT = 860;
 const PHONE_BREAKPOINT = 540;
 const CONTACT_FORM_ENDPOINT = "https://formsubmit.co/ajax/contact@cezar-constantin-chirila.com";
+const TAB_KEYS = ["description", "simulator", "neurons-map"];
 
 const COLORS = {
   ink: [248, 250, 252],
@@ -33,6 +34,7 @@ const COLORS = {
 const state = {
   model: null,
   samples: [],
+  activeTab: "description",
   drawing: false,
   lastPoint: null,
   predictionQueued: false,
@@ -85,6 +87,10 @@ const elements = {
   zoomResetButton: document.getElementById("zoom-reset-button"),
   zoomRange: document.getElementById("zoom-range"),
   zoomValue: document.getElementById("zoom-value"),
+  experienceSection: document.getElementById("experience-section"),
+  tabButtons: Array.from(document.querySelectorAll(".tab-button")),
+  tabPanels: Array.from(document.querySelectorAll(".tab-panel")),
+  tabNavLinks: Array.from(document.querySelectorAll("[data-tab-nav-target]")),
 };
 
 const drawContext = elements.drawCanvas.getContext("2d");
@@ -232,6 +238,62 @@ function configureDrawContext() {
   drawContext.fillStyle = "rgba(255, 255, 255, 0.98)";
   drawContext.shadowColor = "rgba(255, 255, 255, 0.28)";
   updateBrushProfile();
+}
+
+function renderTabs() {
+  elements.tabButtons.forEach((button) => {
+    const isActive = button.dataset.tabTarget === state.activeTab;
+    button.classList.toggle("is-active", isActive);
+    button.setAttribute("aria-selected", String(isActive));
+  });
+
+  elements.tabPanels.forEach((panel) => {
+    panel.hidden = panel.dataset.tabPanel !== state.activeTab;
+  });
+
+  elements.tabNavLinks.forEach((link) => {
+    link.classList.toggle("is-active", link.dataset.tabNavTarget === state.activeTab);
+  });
+}
+
+function activateTab(tabKey, options = {}) {
+  if (!TAB_KEYS.includes(tabKey)) {
+    return;
+  }
+
+  state.activeTab = tabKey;
+  renderTabs();
+
+  if (options.scrollToSection) {
+    elements.experienceSection?.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
+  if (tabKey === "simulator") {
+    requestAnimationFrame(() => {
+      syncResponsiveUi();
+    });
+  }
+}
+
+function setupTabs() {
+  elements.tabButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      activateTab(button.dataset.tabTarget);
+    });
+  });
+
+  elements.tabNavLinks.forEach((link) => {
+    link.addEventListener("click", (event) => {
+      const tabKey = link.dataset.tabNavTarget;
+      if (!TAB_KEYS.includes(tabKey)) {
+        return;
+      }
+      event.preventDefault();
+      activateTab(tabKey, { scrollToSection: true });
+    });
+  });
+
+  renderTabs();
 }
 
 function setupProbabilityBars() {
@@ -1277,6 +1339,7 @@ async function loadModel() {
 }
 
 async function initialize() {
+  setupTabs();
   setupProbabilityBars();
   setupFeatureGrids();
   setupNetworkZoomControls();

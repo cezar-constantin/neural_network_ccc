@@ -47,8 +47,9 @@
         </a>
 
         <nav class="top-nav" aria-label="Section navigation">
-          <a class="nav-link" href="#experience-section">Simulator</a>
-          <a class="nav-link" href="#features-section">Feature maps</a>
+          <a class="nav-link" href="#experience-section" data-tab-nav-target="description">Description</a>
+          <a class="nav-link" href="#experience-section" data-tab-nav-target="simulator">Simulator</a>
+          <a class="nav-link" href="#experience-section" data-tab-nav-target="neurons-map">Neurons map</a>
           <a class="nav-link" href="#contact-section">Contact</a>
         </nav>
 
@@ -89,263 +90,390 @@
       <section class="page-section" id="experience-section">
         <section class="section-intro">
           <p class="section-kicker">Interactive demo</p>
-          <h2>See the network interpret every stroke.</h2>
+          <h2>Explore the network through description, simulation, and neuron maps.</h2>
           <p>
-            The input canvas, normalized preview, neuron diagram, and output bars are all synchronized so the model's
-            internal behavior stays visible instead of hidden behind a final prediction.
+            The simulator is now organized into three views so the pipeline explanation, the live inference flow, and
+            the learned neuron maps each have their own focused space.
           </p>
         </section>
 
-        <div class="workspace-grid">
-          <section class="card draw-panel">
+        <section class="tabs card" aria-label="Simulator views">
+          <div class="tab-list" role="tablist">
+            <button
+              class="tab-button is-active"
+              id="tab-button-description"
+              type="button"
+              role="tab"
+              aria-selected="true"
+              aria-controls="tab-panel-description"
+              data-tab-target="description"
+            >
+              Description
+            </button>
+            <button
+              class="tab-button"
+              id="tab-button-simulator"
+              type="button"
+              role="tab"
+              aria-selected="false"
+              aria-controls="tab-panel-simulator"
+              data-tab-target="simulator"
+            >
+              Simulator
+            </button>
+            <button
+              class="tab-button"
+              id="tab-button-neurons-map"
+              type="button"
+              role="tab"
+              aria-selected="false"
+              aria-controls="tab-panel-neurons-map"
+              data-tab-target="neurons-map"
+            >
+              Neurons Map
+            </button>
+          </div>
+        </section>
+
+        <div class="tab-panels">
+          <section
+            class="card tab-panel"
+            id="tab-panel-description"
+            role="tabpanel"
+            aria-labelledby="tab-button-description"
+            data-tab-panel="description"
+          >
             <div class="section-heading">
               <div>
-                <p class="section-kicker">Input studio</p>
-                <h2>Draw a digit</h2>
+                <p class="section-kicker">Description</p>
+                <h2>How the simulator and the network are organized.</h2>
+              </div>
+              <span class="status-pill">6 explanation cards</span>
+            </div>
+
+            <p class="helper-copy tab-panel-copy">
+              This view combines the pipeline readout and the activation-layer explanation so the full inference story
+              can be scanned before jumping into the live simulator.
+            </p>
+
+            <div class="tab-description-grid">
+              <section class="panel-surface panel-column">
+                <div class="section-heading">
+                  <div>
+                    <p class="section-kicker">Readout</p>
+                    <h2>From drawing to decision</h2>
+                  </div>
+                </div>
+
+                <div class="briefing-list">
+                  <article class="briefing-card">
+                    <p class="card-kicker">Stage 1</p>
+                    <h3>From sketch to tensor</h3>
+                    <p>
+                      The handwritten canvas is compressed into a centered 28x28 grayscale signal, then flattened into
+                      784 inputs.
+                    </p>
+                  </article>
+
+                  <article class="briefing-card">
+                    <p class="card-kicker">Stage 2</p>
+                    <h3>Hidden layers form structure</h3>
+                    <p>
+                      Early neurons respond to local strokes, while the second hidden layer combines them into
+                      digit-like parts.
+                    </p>
+                  </article>
+
+                  <article class="briefing-card">
+                    <p class="card-kicker">Stage 3</p>
+                    <h3>Output probabilities settle the guess</h3>
+                    <p>
+                      The ten output neurons compete through softmax, producing a probability distribution over digits 0
+                      through 9.
+                    </p>
+                  </article>
+                </div>
+              </section>
+
+              <section class="panel-surface panel-column">
+                <div class="section-heading">
+                  <div>
+                    <p class="section-kicker">Layer guide</p>
+                    <h2>What each activation stage means</h2>
+                  </div>
+                </div>
+
+                <div class="description-explain-grid">
+                  <article class="explain-card">
+                    <p class="card-kicker">Input layer</p>
+                    <h3>Every bright pixel becomes an activation.</h3>
+                    <p>
+                      After normalization, the sketch is flattened into 784 scalar values that seed the rest of the
+                      network.
+                    </p>
+                  </article>
+
+                  <article class="explain-card">
+                    <p class="card-kicker">Hidden layer 1</p>
+                    <h3>Stroke detectors come online first.</h3>
+                    <p>
+                      These neurons respond to local diagonals, terminals, bends, corners, and simple stroke pressure
+                      patterns.
+                    </p>
+                  </article>
+
+                  <article class="explain-card">
+                    <p class="card-kicker">Hidden layer 2</p>
+                    <h3>Those strokes combine into digit parts.</h3>
+                    <p>
+                      Curves, loops, bars, and partial circles emerge here before the output layer turns them into a
+                      class decision.
+                    </p>
+                  </article>
+                </div>
+              </section>
+            </div>
+          </section>
+
+          <section
+            class="card tab-panel"
+            id="tab-panel-simulator"
+            role="tabpanel"
+            aria-labelledby="tab-button-simulator"
+            data-tab-panel="simulator"
+            hidden
+          >
+            <div class="section-heading">
+              <div>
+                <p class="section-kicker">Simulator</p>
+                <h2>Draw a digit and inspect the live network response.</h2>
               </div>
               <span class="status-pill" id="input-status">Live prediction</span>
             </div>
 
-            <p class="helper-copy">
-              Draw with a mouse, stylus, or finger. The simulator centers and rescales your sketch before passing it
-              into the network, closely following the same normalization flow used for handwritten-digit inference.
+            <p class="helper-copy tab-panel-copy">
+              The drawing surface, normalized preview, prediction card, probability bars, and activation diagram stay
+              synchronized so the network remains readable while you sketch.
             </p>
 
-            <div class="draw-stage">
-              <div class="canvas-frame">
-                <canvas id="draw-canvas" width="560" height="560" aria-label="Drawing area"></canvas>
-                <div class="pixel-grid" aria-hidden="true"></div>
-              </div>
-
-              <div class="draw-side">
-                <div class="mini-preview">
-                  <div class="preview-label">
-                    <span>Normalized input</span>
-                    <strong>28x28 image seen by the model</strong>
+            <div class="simulator-top-grid">
+              <section class="panel-surface">
+                <div class="section-heading">
+                  <div>
+                    <p class="section-kicker">Input studio</p>
+                    <h2>Draw a digit</h2>
                   </div>
-                  <canvas id="normalized-canvas" width="28" height="28" aria-label="Normalized 28x28 input"></canvas>
                 </div>
 
-                <div class="controls">
-                  <button class="primary-button" id="clear-button" type="button">Clear canvas</button>
-                  <button class="secondary-button" id="sample-button" type="button">Try MNIST sample</button>
-                </div>
+                <p class="helper-copy">
+                  Draw with a mouse, stylus, or finger. The simulator centers and rescales your sketch before passing
+                  it into the network, closely following the same normalization flow used for handwritten-digit
+                  inference.
+                </p>
 
-                <article class="briefing-card">
-                  <p class="card-kicker">Tip</p>
-                  <h3>Draw boldly and keep the digit centered.</h3>
-                  <p>Closed loops and strong stroke contrast usually make the layer activations easier to read.</p>
+                <div class="draw-stage">
+                  <div class="canvas-frame">
+                    <canvas id="draw-canvas" width="560" height="560" aria-label="Drawing area"></canvas>
+                    <div class="pixel-grid" aria-hidden="true"></div>
+                  </div>
+
+                  <div class="draw-side">
+                    <div class="mini-preview">
+                      <div class="preview-label">
+                        <span>Normalized input</span>
+                        <strong>28x28 image seen by the model</strong>
+                      </div>
+                      <canvas id="normalized-canvas" width="28" height="28" aria-label="Normalized 28x28 input"></canvas>
+                    </div>
+
+                    <div class="controls">
+                      <button class="primary-button" id="clear-button" type="button">Clear canvas</button>
+                      <button class="secondary-button" id="sample-button" type="button">Try MNIST sample</button>
+                    </div>
+
+                    <article class="briefing-card">
+                      <p class="card-kicker">Tip</p>
+                      <h3>Draw boldly and keep the digit centered.</h3>
+                      <p>Closed loops and strong stroke contrast usually make the layer activations easier to read.</p>
+                    </article>
+                  </div>
+                </div>
+              </section>
+
+              <aside class="simulator-side-stack">
+                <article class="output-summary-card empty-state" id="output-summary-card">
+                  <p class="card-kicker">Current prediction</p>
+                  <div class="prediction-header">
+                    <div class="prediction-digit" id="prediction-digit">?</div>
+                    <div class="prediction-copy">
+                      <p class="confidence-line">Estimated digit</p>
+                      <h3 id="prediction-label">Waiting for your drawing</h3>
+                      <p class="confidence-line" id="prediction-confidence">Confidence: 0%</p>
+                    </div>
+                  </div>
                 </article>
-              </div>
-            </div>
-          </section>
 
-          <aside class="card briefing-panel">
-            <div class="section-heading">
-              <div>
-                <p class="section-kicker">Readout</p>
-                <h2>What the model is doing</h2>
-              </div>
+                <section class="visual-output-bars" aria-label="Output probabilities">
+                  <p class="card-kicker">Output layer</p>
+                  <h3>Digit probabilities</h3>
+                  <p class="confidence-line">
+                    This probability panel is shown separately from the network diagram so the final class scores can
+                    be read clearly without sitting on top of the output-neuron view.
+                  </p>
+                  <div class="probability-bars" id="probability-bars" aria-live="polite"></div>
+                </section>
+              </aside>
             </div>
 
-            <div class="briefing-list">
-              <article class="output-summary-card empty-state" id="output-summary-card">
-                <p class="card-kicker">Current prediction</p>
-                <div class="prediction-header">
-                  <div class="prediction-digit" id="prediction-digit">?</div>
-                  <div class="prediction-copy">
-                    <p class="confidence-line">Estimated digit</p>
-                    <h3 id="prediction-label">Waiting for your drawing</h3>
-                    <p class="confidence-line" id="prediction-confidence">Confidence: 0%</p>
+            <section class="panel-surface simulator-network-stage">
+              <div class="section-heading">
+                <div>
+                  <p class="section-kicker">Activation map</p>
+                  <h2>Neuron activation</h2>
+                </div>
+
+                <div class="network-toolbar" aria-label="Chart zoom controls">
+                  <span class="zoom-label">Zoom</span>
+                  <button class="zoom-button" id="zoom-out-button" type="button" aria-label="Zoom out">-</button>
+                  <input
+                    class="zoom-range"
+                    id="zoom-range"
+                    type="range"
+                    min="100"
+                    max="240"
+                    step="10"
+                    value="100"
+                    aria-label="Neuron activation zoom"
+                  />
+                  <button class="zoom-button" id="zoom-in-button" type="button" aria-label="Zoom in">+</button>
+                  <button class="zoom-reset-button" id="zoom-reset-button" type="button">Reset</button>
+                  <strong class="zoom-value" id="zoom-value">100%</strong>
+                </div>
+              </div>
+
+              <p class="helper-copy network-hint">
+                Use the zoom controls to inspect dense regions of the diagram. On smaller screens, swipe horizontally
+                inside the network frame to explore the full path from input pixels to final probabilities.
+              </p>
+
+              <section class="connection-legend" aria-label="Connection line explanation">
+                <article class="connection-legend-item">
+                  <span class="connection-line-swatch is-positive" aria-hidden="true"></span>
+                  <div class="connection-legend-copy">
+                    <strong>Electric blue</strong>
+                    <p>Positive weights increase the next neuron's response when the source neuron is active.</p>
+                  </div>
+                </article>
+
+                <article class="connection-legend-item">
+                  <span class="connection-line-swatch is-negative" aria-hidden="true"></span>
+                  <div class="connection-legend-copy">
+                    <strong>Amber contrast</strong>
+                    <p>Negative weights pull the next neuron down and weaken that connection path.</p>
+                  </div>
+                </article>
+
+                <article class="connection-legend-item">
+                  <span class="connection-line-swatch is-visibility" aria-hidden="true"></span>
+                  <div class="connection-legend-copy">
+                    <strong>Opacity and width</strong>
+                    <p>Brighter, thicker edges indicate stronger active influence through the current prediction pass.</p>
+                  </div>
+                </article>
+              </section>
+
+              <div class="network-shell">
+                <div class="network-display">
+                  <div class="network-visual-scroll">
+                    <div class="network-visual-frame" id="network-visual-frame">
+                      <svg id="network-svg" viewBox="0 0 1420 980" role="img" aria-label="Neural network visualization"></svg>
+                    </div>
                   </div>
                 </div>
-              </article>
-
-              <article class="briefing-card">
-                <p class="card-kicker">Stage 1</p>
-                <h3>From sketch to tensor</h3>
-                <p>The handwritten canvas is compressed into a centered 28x28 grayscale signal, then flattened into 784 inputs.</p>
-              </article>
-
-              <article class="briefing-card">
-                <p class="card-kicker">Stage 2</p>
-                <h3>Hidden layers form structure</h3>
-                <p>Early neurons respond to local strokes, while the second hidden layer combines them into digit-like parts.</p>
-              </article>
-
-              <article class="briefing-card">
-                <p class="card-kicker">Stage 3</p>
-                <h3>Output probabilities settle the guess</h3>
-                <p>The ten output neurons compete through softmax, producing a probability distribution over digits 0 through 9.</p>
-              </article>
-            </div>
-          </aside>
-        </div>
-
-        <section class="card network-panel">
-          <div class="section-heading">
-            <div>
-              <p class="section-kicker">Activation map</p>
-              <h2>Neuron activation</h2>
-            </div>
-
-            <div class="network-toolbar" aria-label="Chart zoom controls">
-              <span class="zoom-label">Zoom</span>
-              <button class="zoom-button" id="zoom-out-button" type="button" aria-label="Zoom out">-</button>
-              <input
-                class="zoom-range"
-                id="zoom-range"
-                type="range"
-                min="100"
-                max="240"
-                step="10"
-                value="100"
-                aria-label="Neuron activation zoom"
-              />
-              <button class="zoom-button" id="zoom-in-button" type="button" aria-label="Zoom in">+</button>
-              <button class="zoom-reset-button" id="zoom-reset-button" type="button">Reset</button>
-              <strong class="zoom-value" id="zoom-value">100%</strong>
-            </div>
-          </div>
-
-          <p class="helper-copy network-hint">
-            Use the zoom controls to inspect dense regions of the diagram. On smaller screens, swipe horizontally
-            inside the network frame to explore the full path from input pixels to final probabilities.
-          </p>
-
-          <div class="explain-grid">
-            <article class="explain-card">
-              <p class="card-kicker">Input layer</p>
-              <h3>Every bright pixel becomes an activation.</h3>
-              <p>After normalization, the sketch is flattened into 784 scalar values that seed the rest of the network.</p>
-            </article>
-
-            <article class="explain-card">
-              <p class="card-kicker">Hidden layer 1</p>
-              <h3>Stroke detectors come online first.</h3>
-              <p>These neurons respond to local diagonals, terminals, bends, corners, and simple stroke pressure patterns.</p>
-            </article>
-
-            <article class="explain-card">
-              <p class="card-kicker">Hidden layer 2</p>
-              <h3>Those strokes combine into digit parts.</h3>
-              <p>Curves, loops, bars, and partial circles emerge here before the output layer turns them into a class decision.</p>
-            </article>
-          </div>
-
-          <section class="connection-legend" aria-label="Connection line explanation">
-            <article class="connection-legend-item">
-              <span class="connection-line-swatch is-positive" aria-hidden="true"></span>
-              <div class="connection-legend-copy">
-                <strong>Electric blue</strong>
-                <p>Positive weights increase the next neuron's response when the source neuron is active.</p>
               </div>
-            </article>
-
-            <article class="connection-legend-item">
-              <span class="connection-line-swatch is-negative" aria-hidden="true"></span>
-              <div class="connection-legend-copy">
-                <strong>Amber contrast</strong>
-                <p>Negative weights pull the next neuron down and weaken that connection path.</p>
-              </div>
-            </article>
-
-            <article class="connection-legend-item">
-              <span class="connection-line-swatch is-visibility" aria-hidden="true"></span>
-              <div class="connection-legend-copy">
-                <strong>Opacity and width</strong>
-                <p>Brighter, thicker edges indicate stronger active influence through the current prediction pass.</p>
-              </div>
-            </article>
+            </section>
           </section>
 
-          <div class="network-shell">
-            <div class="network-display">
-              <div class="network-visual-scroll">
-                <div class="network-visual-frame" id="network-visual-frame">
-                  <svg id="network-svg" viewBox="0 0 1420 980" role="img" aria-label="Neural network visualization"></svg>
-                </div>
+          <section
+            class="card tab-panel"
+            id="tab-panel-neurons-map"
+            role="tabpanel"
+            aria-labelledby="tab-button-neurons-map"
+            data-tab-panel="neurons-map"
+            hidden
+          >
+            <div class="section-heading">
+              <div>
+                <p class="section-kicker">Neurons map</p>
+                <h2>Inspect the learned feature maps layer by layer.</h2>
               </div>
+              <span class="status-pill">Feature map explorer</span>
             </div>
-          </div>
 
-          <section class="visual-output-bars" aria-label="Output probabilities">
-            <p class="card-kicker">Output layer</p>
-            <h3>Digit probabilities</h3>
-            <p class="confidence-line">
-              This probability panel is shown separately from the network diagram so the final class scores can be read
-              clearly without sitting on top of the output-neuron view.
+            <p class="helper-copy tab-panel-copy">
+              This view focuses on the learned filters only, making it easier to scan how the hidden layers evolve from
+              simple strokes into richer composite digit parts.
             </p>
-            <div class="probability-bars" id="probability-bars" aria-live="polite"></div>
+
+            <div class="neurons-map-stack">
+              <section class="panel-surface">
+                <div class="section-heading">
+                  <div>
+                    <p class="section-kicker">Feature maps</p>
+                    <h2>How the learned filters are visualized</h2>
+                  </div>
+                </div>
+
+                <p class="feature-overview-copy">
+                  Each thumbnail below represents a learned weight pattern. Brighter cyan and blue areas correspond to
+                  positive weights, while warm contrast tones indicate negative influence. Dark regions are near zero
+                  and contribute only weakly.
+                </p>
+
+                <div class="legend-grid">
+                  <div class="legend-item">
+                    <span class="legend-swatch legend-layer-1"></span>
+                    <span>Layer 1 uses cyan to emphasize early stroke detectors.</span>
+                  </div>
+                  <div class="legend-item">
+                    <span class="legend-swatch legend-layer-2"></span>
+                    <span>Layer 2 uses blue to show richer composite patterns.</span>
+                  </div>
+                  <div class="legend-item">
+                    <span class="legend-swatch legend-negative"></span>
+                    <span>Warm tones mark negative weights that suppress activation.</span>
+                  </div>
+                  <div class="legend-item">
+                    <span class="legend-swatch legend-neutral"></span>
+                    <span>Deep navy indicates values close to zero.</span>
+                  </div>
+                </div>
+              </section>
+
+              <section class="feature-sections">
+                <section class="panel-surface">
+                  <div class="section-heading">
+                    <div>
+                      <p class="section-kicker">Layer 1</p>
+                      <h2>Strokes and local patterns</h2>
+                    </div>
+                  </div>
+                  <div class="feature-grid" id="feature-grid-layer-1"></div>
+                </section>
+
+                <section class="panel-surface">
+                  <div class="section-heading">
+                    <div>
+                      <p class="section-kicker">Layer 2</p>
+                      <h2>Digit parts and composite shapes</h2>
+                    </div>
+                  </div>
+                  <div class="feature-grid" id="feature-grid-layer-2"></div>
+                </section>
+              </section>
+            </div>
           </section>
-        </section>
-      </section>
-
-      <section class="page-section" id="features-section">
-        <section class="section-intro">
-          <p class="section-kicker">Feature maps</p>
-          <h2>Inspect the patterns each layer has learned.</h2>
-          <p>
-            These learned filters show how the hidden layers transition from simple local stroke detection to broader
-            digit-part representations.
-          </p>
-        </section>
-
-        <section class="card feature-overview">
-          <div class="section-heading">
-            <div>
-              <p class="section-kicker">Feature maps</p>
-              <h2>How the learned filters are visualized</h2>
-            </div>
-          </div>
-
-          <p class="feature-overview-copy">
-            Each thumbnail below represents a learned weight pattern. Brighter cyan and blue areas correspond to
-            positive weights, while warm contrast tones indicate negative influence. Dark regions are near zero and
-            contribute only weakly.
-          </p>
-
-          <div class="legend-grid">
-            <div class="legend-item">
-              <span class="legend-swatch legend-layer-1"></span>
-              <span>Layer 1 uses cyan to emphasize early stroke detectors.</span>
-            </div>
-            <div class="legend-item">
-              <span class="legend-swatch legend-layer-2"></span>
-              <span>Layer 2 uses blue to show richer composite patterns.</span>
-            </div>
-            <div class="legend-item">
-              <span class="legend-swatch legend-negative"></span>
-              <span>Warm tones mark negative weights that suppress activation.</span>
-            </div>
-            <div class="legend-item">
-              <span class="legend-swatch legend-neutral"></span>
-              <span>Deep navy indicates values close to zero.</span>
-            </div>
-          </div>
-        </section>
-
-        <section class="feature-sections">
-          <section class="card feature-panel">
-            <div class="section-heading">
-              <div>
-                <p class="section-kicker">Layer 1</p>
-                <h2>Strokes and local patterns</h2>
-              </div>
-            </div>
-            <div class="feature-grid" id="feature-grid-layer-1"></div>
-          </section>
-
-          <section class="card feature-panel">
-            <div class="section-heading">
-              <div>
-                <p class="section-kicker">Layer 2</p>
-                <h2>Digit parts and composite shapes</h2>
-              </div>
-            </div>
-            <div class="feature-grid" id="feature-grid-layer-2"></div>
-          </section>
-        </section>
+        </div>
       </section>
 
       <section class="footer-panel-grid" aria-label="Support and disclaimer">
