@@ -469,6 +469,12 @@ svg {
   text-wrap: normal;
 }
 
+.description-intro-line {
+  width: 100%;
+  max-width: none;
+  white-space: nowrap;
+}
+
 .tab-button {
   display: inline-flex;
   align-items: center;
@@ -1393,6 +1399,12 @@ svg {
   .primary-button,
   .secondary-button {
     width: 100%;
+  }
+}
+
+@media (max-width: 1280px) {
+  .description-intro-line {
+    white-space: normal;
   }
 }
 
